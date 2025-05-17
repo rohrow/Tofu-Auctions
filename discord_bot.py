@@ -1,5 +1,5 @@
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 from datetime import datetime, timedelta
 from collections import defaultdict
 import asyncio
@@ -26,6 +26,7 @@ THREAD_PREFIX = {
 # Initialize the bot
 intents = discord.Intents.default()
 intents.messages = True
+intents.message_content = True
 intents.guilds = True
 bot = commands.Bot(command_prefix="!", intents=intents)
 
@@ -46,7 +47,7 @@ def is_staff(ctx):
     return ctx.author.id in STAFF_IDS
 
 @commands.check(is_staff)
-@commands.command()
+@commands.command(aliases=['createThreads', 'ct'])
 async def check_auction_channels(ctx):
     today = datetime.now().strftime("%m/%d/%Y")
     for channel_name, channel_id in CHANNELS.items():
@@ -56,6 +57,8 @@ async def check_auction_channels(ctx):
             continue
 
         async for message in channel.history(limit=100, after=MESSAGES_DATE):  # Adjust the message limit as needed
+            if message.id == ctx.message.id:  # Skip the command message
+                continue
             if message.author.bot:  # Ignore bot messages
                 continue
             if message.flags.has_thread:  # Skip if a thread already exists
@@ -82,4 +85,5 @@ async def check_auction_channels(ctx):
 
 # Initial thread message
 # Run the bot
+bot.add_command(check_auction_channels)
 bot.run(BOT_TOKEN)
