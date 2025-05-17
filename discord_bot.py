@@ -11,6 +11,7 @@ load_dotenv()
 
 # Replace hardcoded token with environment variable
 BOT_TOKEN = os.getenv("BOT_TOKEN")
+STAFF_IDS = [733731050336944130,763408346581303327,742062538375561327,645670740875542540]
 CHANNELS = {
     "single-print-auction": 1288166824571306056,
     "low-print-auction": 1288166867097354282,
@@ -80,14 +81,5 @@ async def check_auction_channels():
 
 
 # Initial thread message
-
-
-@bot.command()
-async def manual_check(ctx):
-    """Command to trigger a manual check"""
-    await check_auction_channels()
-
-
 # Run the bot
 bot.run(BOT_TOKEN)
-STAFF_IDS = [733731050336944130,763408346581303327,742062538375561327,645670740875542540]
