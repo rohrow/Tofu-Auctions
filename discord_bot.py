@@ -47,7 +47,7 @@ def is_staff(ctx):
 
 @commands.check(is_staff)
 @commands.command()
-async def check_auction_channels():
+async def check_auction_channels(ctx):
     today = datetime.now().strftime("%m/%d/%Y")
     for channel_name, channel_id in CHANNELS.items():
         channel = bot.get_channel(channel_id)
