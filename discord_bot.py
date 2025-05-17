@@ -37,12 +37,15 @@ MESSAGES_DATE = datetime.now() - timedelta(days=2)
 @bot.event
 async def on_ready():
     print(f"Logged in as {bot.user}")
-    await check_auction_channels()
-    print("Processing complete. Shutting down...")
-    await bot.close()  # Log out and terminate the bot
+    # await check_auction_channels()
+    # print("Processing complete. Shutting down...")
+    # await bot.close()  # Log out and terminate the bot
 
+def is_staff(ctx):
+    return ctx.author.id in STAFF_IDS
 
-@tasks.loop(minutes=15)  # Adjust frequency as needed
+@commands.check(is_staff)
+@commands.command()
 async def check_auction_channels():
     today = datetime.now().strftime("%m/%d/%Y")
     for channel_name, channel_id in CHANNELS.items():
@@ -87,3 +90,4 @@ async def manual_check(ctx):
 
 # Run the bot
 bot.run(BOT_TOKEN)
+STAFF_IDS = [733731050336944130,763408346581303327,742062538375561327,645670740875542540]
