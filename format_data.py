@@ -2,6 +2,10 @@ import discord
 from discord.ext import commands
 import io
 
+STAFF_IDS = [733731050336944130,763408346581303327,742062538375561327,645670740875542540]
+def is_staff(ctx):
+    return ctx.author.id in STAFF_IDS
+@commands.check(is_staff)
 @commands.command(aliases=['fd', "format_data"])
 async def format_data_command(ctx):
     if not ctx.message.attachments:
