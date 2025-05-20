@@ -5,6 +5,7 @@ from collections import defaultdict
 import asyncio
 import os
 from dotenv import load_dotenv
+from format_data import format_data_command
 
 # Load environment variables from .env file
 load_dotenv()
@@ -83,8 +84,8 @@ async def check_auction_channels(ctx):
 
         await asyncio.sleep(3) # Add a delay between channel checks
 
-
 # Initial thread message
 # Run the bot
 bot.add_command(check_auction_channels)
+bot.add_command(format_data_command)
 bot.run(BOT_TOKEN)
