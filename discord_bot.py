@@ -93,6 +93,17 @@ async def close(ctx):
     else:
         await ctx.send("This command can only be used inside a thread.")
 
+@bot.event
+async def on_command_error(ctx, original_error):
+    error = getattr(original_error, "original", original_error)
+    try:
+        if isinstance(error, commands.CommandNotFound):
+            return
+        else:
+            pass
+    except discord.Forbidden:
+        pass
+    raise error
 
 # Run the bot
 bot.add_command(check_auction_channels)
