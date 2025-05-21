@@ -30,7 +30,13 @@ async def format_data_command(ctx):
             ":Great:": "<:Pristine:830383264572243978>",
             ":Pristine:": "<:Pristine:830383264572243978>",
             ":Good:": "<:Pristine:830383264572243978>",
-            ":Scarred:": "<:Pristine:830383264572243978>"
+            ":Scarred:": "<:Pristine:830383264572243978>",
+            ":Worn~1:": "<:Pristine:830383264572243978>",
+            ":Great~1:": "<:Pristine:830383264572243978>",
+            ":Pristine~1:": "<:Pristine:830383264572243978>",
+            ":Good~1:": "<:Pristine:830383264572243978>",
+            ":Scarred~1:": "<:Pristine:830383264572243978>"
+
         }
         placeholder = "<TEMP_PLACEHOLDER>"
 

@@ -84,8 +84,18 @@ async def check_auction_channels(ctx):
 
         await asyncio.sleep(3) # Add a delay between channel checks
 
-# Initial thread message
+@commands.check(is_staff)
+@commands.command(aliases=['closethread', 'cth'])
+async def close(ctx):
+    # Check if the command is used inside a thread
+    if isinstance(ctx.channel, discord.Thread):
+        await ctx.channel.edit(locked=True, archived=True)
+    else:
+        await ctx.send("This command can only be used inside a thread.")
+
+
 # Run the bot
 bot.add_command(check_auction_channels)
 bot.add_command(format_data_command)
+bot.add_command(close)
 bot.run(BOT_TOKEN)
